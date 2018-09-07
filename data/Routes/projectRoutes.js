@@ -34,5 +34,26 @@ router.post('/', (req, res) => {
         })
 });
 
+router.put('/edit/:id', (req, res) => {
+    db.update(req.params.id, req.body)
+        .then((response) => {
+            if (response === 0) {
+                res.status(404).json({ message: 'Project by that ID not found' });
+            }
+            res.status(200).json({ message: `Project ${req.params.id} has been edited` });
+        })
+})
+
+router.delete('/:id', (req, res) => {
+    db.remove(req.params.id)
+        .then((response) => {
+            if (response === 0) {
+                res.status(404).json({ message: 'Project by that ID not found' });
+            }
+            res.status(200).json({ message: `Project ${req.params.id} has been deleted` });
+        })
+})
+
+
 
 module.exports = router;
