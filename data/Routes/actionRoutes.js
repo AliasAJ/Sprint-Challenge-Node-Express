@@ -24,4 +24,34 @@ router.get('/:id', (req, res) => {
         })
 });
 
+router.post('/', (req, res) => {
+    db.insert(req.body)
+        .then((response) => {
+            res.status(201).json(response);
+        })
+        .catch((err) => {
+            console.err(err);
+        })
+});
+
+router.put('/edit/:id', (req, res) => {
+    db.update(req.params.id, req.body)
+        .then((response) => {
+            if (response === 0) {
+                res.status(404).json({ message: 'Action by that ID not found' });
+            }
+            res.status(200).json({ message: `Action ${req.params.id} has been edited` });
+        })
+})
+
+router.delete('/:id', (req, res) => {
+    db.remove(req.params.id)
+        .then((response) => {
+            if (response === 0) {
+                res.status(404).json({ message: 'Action by that ID not found' });
+            }
+            res.status(200).json({ message: `Action ${req.params.id} has been deleted` });
+        })
+})
+
 module.exports = router;
