@@ -1,5 +1,5 @@
 const express = require('express');
-const db = require('../data/helpers/projectModel.js');
+const db = require('../helpers/projectModel');
 
 const router = express.Router();
 
@@ -23,5 +23,16 @@ router.get('/:id', (req, res) => {
             console.error(err);
         })
 });
+
+router.post('/', (req, res) => {
+    db.insert(req.body)
+        .then((response) => {
+            res.status(201).json(response);
+        })
+        .catch((err) => {
+            console.err(err);
+        })
+});
+
 
 module.exports = router;

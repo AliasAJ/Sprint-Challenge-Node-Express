@@ -3,8 +3,8 @@ const server = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
-const projectRoutes = require('./Routes/projectRoutes');
-const actionRoutes = require('./Route/actionRoutes');
+const projectRoutes = require('./data/Routes/projectRoutes');
+const actionRoutes = require('./data/Routes/actionRoutes');
 
 server.use(cors());
 server.use(bodyParser.json());
