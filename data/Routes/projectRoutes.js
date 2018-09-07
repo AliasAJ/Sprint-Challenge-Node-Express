@@ -54,6 +54,16 @@ router.delete('/:id', (req, res) => {
         })
 })
 
+router.get('/actions/:id', (req, res) => {
+    db.getProjectActions(req.params)
+        .then((response) => {
+            if (response === 0) {
+                res.status(404).json({ message: 'Project actions not found' });
+            }
+            res.status(200).json(response);
+        })
+})
+
 
 
 module.exports = router;
